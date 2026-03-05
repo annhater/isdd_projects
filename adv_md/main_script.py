@@ -9,6 +9,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import random as rd
+import pandas as pd
+
 
 #define constants
 L = 5
@@ -18,6 +20,7 @@ num = 10
 w_i = [rd.uniform(0.5, 1) for _ in range(num)]
 x_i = [rd.randint(-L, L) for _ in range(num)]
 y_i = [rd.randint(-L, L) for _ in range(num)]
+
 # define the energy potential formula
 def energy_potential(x,y):
   energy = 0 # accumulate the sum
@@ -118,12 +121,16 @@ for _ in range(n_etapes):
     traj_y.append(y_act)
 
 
-
 # visualize the path
 
 # plot the path
 plt.contourf(X_space, Y_space, Z, levels=50, alpha=0.8)
 plt.plot(traj_x, traj_y, color='white', marker='o', markersize=3, linewidth=1)
+plt.scatter(traj_x[0], traj_y[0], color='red', label='Start', s=100, zorder = 4)  # starting point
+plt.scatter(traj_x[-1], traj_y[-1], color='blue', label='End', s=100, zorder = 5)  # ending point
+plt.title('Monte Carlo Simulation Path on Energy Landscape')
+plt.xlabel('X-coordinate')
+plt.ylabel('Y-coordinate')
 plt.legend()
 plt.show()   
 

@@ -1,0 +1,30 @@
+# Exo axe hélice
+
+On cherche à calculer et représenter l'axe de la première hélice alpha de la protéine 1bta. Pour cela, on utilise les coordonnées des CA de la SER14 à l'ALA25. Nous vous fournissons le fichier helix1.pdb contenant cette hélice. Regardez là avec vmd  : style -> simple -> trace (cela permet de relier les CA par des bâtons).
+
+Nous vous fournissons le fichier helix1.dat contenant les coordonnées (x, y, z) des CA. A partir de ce fichier, lire les coordonnées sous forme d'un array-2D nommé coords (n atomes * 3 coors). Bien vérifier sa taille.
+
+Centrer les données de manière à ce que leur moyenne soit 0. Bien vérifier que cela a fonctionné.
+
+Standardiser les données de manière à ce que leur écart type soit 1. Bien vérifier que cela a fonctionné.
+
+Calculer et afficher la matrice de variance / covariance. Quelle taille doit-elle avoir ?
+
+Calculer les valeurs propres / vecteurs propres. Combien en trouvez-vous ?
+
+Récupérer le vecteur propre de + grande valeur propre (on dit aussi premier vecteur propre). Celui-ci est l'axe de l'hélice !
+
+Pour dessiner une flèche dans vmd, copiez/collez cela dans la console :
+
+proc vmd_draw_arrow {mol start end} {
+    # an arrow is made of a cylinder and a cone
+    set middle [vecadd $start [vecscale 0.9 [vecsub $end $start]]]
+    graphics $mol cylinder $start $middle radius 0.15
+    graphics $mol cone $middle $end radius 0.25
+}
+
+Puis tapez dans la console:
+
+draw arrow {x1 y1 z1} {x2 y2 z2}
+
+Choisissez (x1, y1, z1) comme étant les coordonnées du centre de masse de l'hélice. Choisissez (x2, y2, z2) comme étant les coordonnées du du centre de masse de l'hélice + (vect propre 1) * facteur (le facteur dessine une flèche +/- longue, prenez 10 par exemple). Admirez le résultat dans vmd !
